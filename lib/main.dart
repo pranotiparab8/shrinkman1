@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shrinkman1/signIn.dart';
+
+import 'bottom_navigation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         appBarTheme: AppBarTheme(),
       ),
-      home: PrefixIconExampleApp(),
+      home: Bottom_Navigation(),
     );
   }
 }

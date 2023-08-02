@@ -1,0 +1,84 @@
+{
+  "faq": [
+    {
+      "question": "What is Shrinkman optimization ?",
+      "answer": "Shrinkman Suite is an Image and PDF optimization technology that reduces the file size of images and PDF’s  up to 96% while preserving the resolution and quality of the original file."
+    },
+    {
+      "question": "Why should I use Shrinkman optimization ?",
+      "answer": "With Shrinkman Suite  you can store more optimised files on your hard drive and online photo service accounts, attach more optimised files to your emails and upload your optimised files faster to the web. If you have an image-intensive website, your pages will load faster, improving user experience, monetization, and SEO, and you’ll also reduce your storage and bandwidth costs."
+    },
+    {
+      "question": "How much can we downsize your files (Images, PDF &amp; MS Office ) using Shrinkman optimization ?",
+      "answer": "Optimization results are not really predictable. If supported file formats are already optimized, optimization ratio will be limited. But for most of our users files, optimizations can always be found and size dramatically reduced. Some file sizes can be reduced by up to 96%."
+    },
+    {
+      "question": "How can I optimize my files using Shrinkman optimization ?",
+      "answer": "The easiest way is to drag and drop your files straight to our tool. You can also click on the ‘Select files’ button or import your files from the specific location on your hard drives or Pen Drives."
+    },
+    {
+      "question": "Is Shrinkman optimization a new file format ?",
+      "answer": "No. Shrinkman files formats are in standard image and PDF format, which can be viewed and edited by any browser, native file viewers, photo software or consumer device."
+    },
+    {
+      "question": "If I send an optimized file to someone, do they need a copy of Shrinkman tool to open it at their end?",
+      "answer": "No. The optimized file remains in a graphical format and can be opened like any other picture or image file"
+    },
+    {
+      "question": "Can you briefly explain what Shrinkman optimization is?",
+      "answer": "Shrinkman optimization reorganizes the data in an image and PDF file, storing it more efficiently so its size can be reduced without losing important details in the process. Reorganizing the data could mean images are optimized and/or reformatted in order to reduce file size."
+    },
+    {
+      "question": "What are the file formats Supported in Shrinkman Optimization ?",
+      "answer": "PDF Documents (*.pdf)\nJPEG images (*.jpg; *.jpeg;)\nPNG images (*.png)\nVideo files (*.mkv; *.mov; *.mp4; )"
+    },
+    {
+      "question": "Can I print my files after Shrinkman optimization?",
+      "answer": "Absolutely. Since Shrinkman does not alter the perceptual quality of your Images PDF and other supported file formats, you can print them at the same size you would print your originals, and the prints will look exactly the same."
+    },
+    {
+      "question": "How do I make sure that the quality of my files are not affected by Shrinkman optimization ?",
+      "answer": "Shrinkman optimization technology has undergone extensive user testing, which proved that average users could not distinguish between original files and Shrinkman optimised  files. You are welcome to test the quality on your own files. After optimizing them with Shrinkman, compare them side by side at 100% zoom (“Actual Size”), where each pixel on the screen corresponds to a pixel in the file."
+    },
+    {
+      "question": "Can I use Shrinkman optimization after using other image editors or compression software?",
+      "answer": "Yes, J Shrinkman optimization accepts standard / native file format as input, and outputs also will be in the same standard / Native file format as well. So any image editor, effects software, photo management software, etc. can be used before or after Shrinkman optimization. We recommend using Shrinkman as the last step in your file processing flow, since any image/ PDF encoding (due to additional edits or processing) applied after Shrinkman optimization will eliminate the optimization benefits achieved by Shrinkman."
+    },
+    {
+      "question": "Can I optimise PDF files created by Scanners or digitally created?",
+      "answer": "Yes, you can compare PDF files which contain pages of images, i.e. no text, commonly created by scanners or digitally created."
+    },
+    {
+      "question": "How can I contact Shrinkman ?",
+      "answer": "For general inquiries, you can write to us at\n info@shrinkman.com\nFor technical support please email us at\nsupport@ shrinkman.com"
+    },
+    {
+      "question": "What happens if I select a folder that contains both Images, PDF’s &amp; MS files and other non-supported file formats in the Shrinkman ?",
+      "answer": "Shrinkman only compress supported files file formats, so other non-supported file formats will be skipped."
+    },
+    {
+      "question": "Why does my Shrinkman optimization take so long ?",
+      "answer": "Unfortunately, this is not entirely in our hands. Processing speed depends on many factors, so the time that will take you to get your files optimized will depend as well on your own system hardware configuration, the size of the selected files and, mostly, on how busy your systems are."
+    },
+    {
+      "question": "Why did I not receive the confirmation of my email address ?",
+      "answer": "The confirmation email should be delivered to your email account immediately. Although, sometimes it may take some time. If after 30 minutes nothing makes it into your inbox, check your Spam/Trash Folder or shoot us an email."
+    },
+    {
+      "question": "What are methods of Product Activation ?",
+      "answer": "Shrinkman products include activation technology that helps prevent unauthorized use of the software in a manner that has minimal impact on licensed users.\nWhen a customer installs a Shrinkman product that requires activation, the customer is asked to select one of the following activation methods:\n\n        Automatic: The software connects to the activation server over a secure channel and completes the activation process without any user interaction. This is the most convenient and simple method.\n\nManual (Web-based): The user must copy the Product ID and visit this Web site to enter the Product ID into the appropriate field. After submitting the Product ID, the user is given the Activation Code that should be copied and entered into the software activation wizard. This method should be used if it\\'s impossible to connect to the Internet from the computer where our product is installed.\n\nManual (E-mail-based): The user should copy the Product ID and send it to the specified e-mail address. Complete instructions can be found in the software activation wizard. This method should be used if the previous two methods don\\'t work for any reason.\n\nEnter your Product ID into the field below. The Product ID is 48 symbols long (excluding dashes). You can copy and paste it from the activation wizard or type it in manually. Dashes and/or spaces are optional and will be ignored:"
+    },
+    {
+      "question": "Is product activation a time-consuming process?",
+      "answer": "No, it takes less than a minute to activate software in automatic mode and only several minutes to activate in manual mode. The process is very simple and is performed with the help of a simple software activation wizard."
+    },
+    {
+      "question": "When do I have to activate the product?",
+      "answer": "You may use the product without activation for 7 days. This is called the \"grace period\". You can activate the product at any time, but after the grace period expires, activation becomes mandatory, i.e. you will not be able to continue using the product unless you activate it. During the grace period, the software will periodically display activation reminders."
+    },
+    {
+      "question": "How many installations can I make with a single user license?",
+      "answer": "Typically, with a single-user license you can install the product on single computers. You can also transfer a license to a new computer, but the product must first be removed from the previous computer. In such cases you may be required to contact us for manual activation. Reinstallation on the same computer under the same Windows copy can be done an unlimited number of times.\n"
+    }
+  ]
+}
