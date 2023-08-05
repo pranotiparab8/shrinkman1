@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PrefixIconExampleApp extends StatelessWidget {
-  const PrefixIconExampleApp({super.key});
+class SignIn1 extends StatelessWidget {
+  const SignIn1({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,17 +31,23 @@ class SignIn extends StatelessWidget {
         children: [
           Stack(
             children: [
+              SizedBox(
+                  width: double.infinity,
+                  child: SvgPicture.asset(
+                    "assets/images/Union (2).svg",
+                    fit: BoxFit.fill,
+                  )),
               Padding(
-                padding: EdgeInsets.only(top: 30),
+                padding: EdgeInsets.only(top: 27),
                 child: Image(
-                  height: 300,
+                  height: 200,
                   width: double.infinity,
                   fit: BoxFit.fill,
                   image: AssetImage("assets/images/Background.jpg"),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(80.0),
+                padding: EdgeInsets.all(50.0),
                 child: Center(
                   child: Image(
                     image: AssetImage("assets/images/Logo.jpg"),
@@ -49,11 +55,12 @@ class SignIn extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(120.0),
+                padding: EdgeInsets.all(85.0),
                 child: Center(
                   child: SvgPicture.asset("assets/images/Shrinkman Icon.svg"),
                 ),
               ),
+
               // Padding(
               //   padding: const EdgeInsets.only(top: 210.0),
               //   child: ClipPath(
@@ -94,7 +101,7 @@ class SignIn extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
             child: TextFormField(
               obscureText: true,
               decoration: InputDecoration(
@@ -118,7 +125,7 @@ class SignIn extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 30),
               child: SizedBox(
                 width: 216,
                 height: 48,

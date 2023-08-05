@@ -1,77 +1,77 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
 
-void main() => runApp(MyApp1());
-
-class MyApp1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: GalleryScreen(),
-    );
-  }
-}
-
-class GalleryScreen extends StatefulWidget {
-  @override
-  _GalleryScreenState createState() => _GalleryScreenState();
-}
-
-class _GalleryScreenState extends State<GalleryScreen> {
-  List<File> _images = [];
-
-  @override
-  void initState() {
-    super.initState();
-    requestStoragePermission();
-  }
-
-  void requestStoragePermission() async {
-    var status = await Permission.storage.request();
-    if (status.isGranted) {
-      // Permission is granted. Proceed to load images.
-    } else {
-      // Permission is denied.
-    }
-  }
-
-  Future<void> _loadGalleryImages() async {
-    final picker = ImagePicker();
-    PickedFile? pickedFile =
-        (await picker.pickImage(source: ImageSource.gallery)) as PickedFile?;
-
-    if (pickedFile != null) {
-      setState(() {
-        _images.add(File(pickedFile.path));
-      });
-    }
-  }
-
+class Expansiontile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gallery Screen'),
+        centerTitle: true,
+        title: Text('Expansion Tile'),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            ElevatedButton(
-              onPressed: _loadGalleryImages,
-              child: Text('Pick Images from Gallery'),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: _images.length,
-                itemBuilder: (context, index) {
-                  return Image.file(_images[index]);
-                },
+      body: Container(
+        height: 50.0,
+        width: 335.0,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          color: Color(0xFFffffff),
+          boxShadow: [
+            BoxShadow(
+              color: Color(0xffDDDDDD),
+              blurRadius: 4.0, // soften the shadow
+              spreadRadius: 1.0, //extend the shadow
+              offset: Offset(
+                1.0, // Move to right 5  horizontally
+                1.0, // Move to bottom 5 Vertically
               ),
-            ),
+            )
           ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 20.0),
+              Theme(
+                data: Theme.of(context)
+                    .copyWith(dividerColor: Colors.transparent),
+                child: ExpansionTile(
+                  title: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "File Name",
+                        style: TextStyle(
+                            color: Color(0xFF064494),
+                            fontWeight: FontWeight.w500),
+                      ),
+                      SizedBox(width: 20),
+                      Text("2.2Mb",
+                          style: TextStyle(
+                              color: Color(0xFF064494),
+                              fontWeight: FontWeight.w500)),
+                      Icon(Icons.arrow_right_alt),
+                      Text("300kb",
+                          style: TextStyle(
+                              color: Color(0xFF064494),
+                              fontWeight: FontWeight.w500)),
+                    ],
+                  ),
+                  children: <Widget>[
+                    ListTile(
+                        title: Row(
+                      children: [
+                        Icon(Icons.delete, color: Color(0xFF064494)),
+                        SizedBox(width: 15),
+                        Icon(Icons.folder_open, color: Color(0xFF064494)),
+                        SizedBox(width: 15),
+                        Icon(Icons.share, color: Color(0xFF064494)),
+                      ],
+                    ))
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
