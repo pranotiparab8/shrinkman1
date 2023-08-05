@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'bottom_navigation.dart';
+import 'Hello.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         appBarTheme: AppBarTheme(),
       ),
-      home: Bottom_Navigation(),
+      home: MyApp1(),
     );
   }
 }

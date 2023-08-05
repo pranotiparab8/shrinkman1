@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'FAQ1.dart';
+
 class Setting extends StatefulWidget {
   const Setting({Key? key}) : super(key: key);
 
@@ -24,8 +26,15 @@ class _SettingState extends State<Setting> {
           actions: [
             Padding(
               padding: const EdgeInsets.only(top: 8.0, right: 24),
-              child:
-                  const Icon(Icons.help_outline, color: Colors.red, size: 24),
+              child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const FAQ1()),
+                    );
+                  },
+                  child: const Icon(Icons.help_outline,
+                      color: Colors.red, size: 24)),
             ),
           ],
         ),

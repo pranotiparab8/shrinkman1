@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shrinkman1/photo.dart';
 
 import 'FAQ1.dart';
 
@@ -113,9 +114,17 @@ class _Home_PageState extends State<Home_Page> {
                     )
                   ],
                 ),
-                child: SvgPicture.asset(
-                  "assets/images/Photo tab.svg",
-                  width: 170,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Photo()),
+                    );
+                  },
+                  child: SvgPicture.asset(
+                    "assets/images/Photo tab.svg",
+                    width: 170,
+                  ),
                 ),
               ),
               Container(

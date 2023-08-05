@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'FAQ1.dart';
+
 class File_Page extends StatefulWidget {
   const File_Page({Key? key}) : super(key: key);
 
@@ -24,7 +26,14 @@ class _File_PageState extends State<File_Page> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(top: 8.0, right: 24),
-            child: const Icon(Icons.help_outline, color: Colors.red, size: 24),
+            child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => FAQ1()),
+                  );
+                },
+                child: Icon(Icons.help_outline, color: Colors.red, size: 24)),
           )
         ],
       ),
