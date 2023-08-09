@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'faq_model.dart';
+import '../model/faq_model.dart';
 import 'home_page.dart';
 
 class FAQ1 extends StatefulWidget {

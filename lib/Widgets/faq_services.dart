@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 
-import 'faq_model.dart';
+import '../model/faq_model.dart';
 
 Future<String> _loadAddressAsset() async {
   return await rootBundle.loadString('assets/address.json');

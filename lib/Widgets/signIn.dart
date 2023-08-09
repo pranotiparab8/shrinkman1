@@ -60,17 +60,6 @@ class SignIn extends StatelessWidget {
                   child: SvgPicture.asset("assets/images/Shrinkman Icon.svg"),
                 ),
               ),
-
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 210.0),
-              //   child: ClipPath(
-              //     clipper: WaveClipperTwo(flip: false, reverse: true),
-              //     child: Container(
-              //       height: 120,
-              //       color: Color(0xFF064494),
-              //     ),
-              //   ),
-              // ),
             ],
           ),
           const Text(

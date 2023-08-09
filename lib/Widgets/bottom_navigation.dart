@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shrinkman1/setting.dart';
+import 'package:shrinkman1/Widgets/setting.dart';
 
 import 'file_page.dart';
 import 'home_page.dart';

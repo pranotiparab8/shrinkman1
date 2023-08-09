@@ -316,18 +316,6 @@ class Target_size extends StatelessWidget {
                             ),
                           ),
                         ),
-                        // ElevatedButton(
-                        //     style: ButtonStyle(
-                        //         backgroundColor: MaterialStateProperty.all(
-                        //             Color(0xFFFEFEFE)),
-                        //         shape: MaterialStateProperty.all(
-                        //             RoundedRectangleBorder(
-                        //                 borderRadius:
-                        //                     BorderRadius.circular(10)))),
-                        //     onPressed: () {},
-                        //     child: Text("4032 X 3024",
-                        //         style: GoogleFonts.lato(
-                        //             color: Color(0xFF255BA1)))),
                       )
                     ],
                   ),
@@ -376,18 +364,6 @@ class Target_size extends StatelessWidget {
                             ),
                           ),
                         ),
-                        // ElevatedButton(
-                        //     style: ButtonStyle(
-                        //         backgroundColor: MaterialStateProperty.all(
-                        //             Color(0xFFFEFEFE)),
-                        //         shape: MaterialStateProperty.all(
-                        //             RoundedRectangleBorder(
-                        //                 borderRadius:
-                        //                     BorderRadius.circular(10)))),
-                        //     onPressed: () {},
-                        //     child: Text("4032 X 3024",
-                        //         style: GoogleFonts.lato(
-                        //             color: Color(0xFF255BA1)))),
                       )
                     ],
                   )
@@ -397,6 +373,16 @@ class Target_size extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: Container(
+          color: Color(0xFFD4001A),
+          height: 48,
+          width: double.infinity,
+          child: Center(
+            child: Text(
+              "Start Compressing",
+              style: GoogleFonts.lato(color: Colors.white),
+            ),
+          )),
     );
   }
 }
