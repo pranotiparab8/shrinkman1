@@ -16,7 +16,7 @@ class Select_Image extends StatefulWidget {
 }
 
 class _Select_ImageState extends State<Select_Image> {
-  var size1;
+  bool selected = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +72,7 @@ class _Select_ImageState extends State<Select_Image> {
             }
 
             final List<AssetEntity> mediaItems = snapshot.data ?? [];
+            //final int size = snapshot.data!.;
 
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -97,41 +98,143 @@ class _Select_ImageState extends State<Select_Image> {
     );
   }
 
+  // Widget _buildMediaTile(AssetEntity asset) {
+  //   return FutureBuilder<Uint8List?>(
+  //     future: asset.thumbnailDataWithSize(const ThumbnailSize(200, 200)),
+  //     builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
+  //       if (snapshot.connectionState == ConnectionState.done &&
+  //           snapshot.data != null) {
+  //         print(asset.originBytes);
+  //
+  //         print(snapshot.data!.lengthInBytes);
+  //         dynamic size1 = snapshot.data!.lengthInBytes;
+  //         int sizeInBytes1 = size1;
+  //         double sizeInKilobytes1 = sizeInBytes1 / 1024;
+  //         double sizeInMegabytes1 = sizeInKilobytes1 / 1024;
+  //         dynamic size4;
+  //         if (sizeInKilobytes1 <= 1024) {
+  //           size4 = "${sizeInKilobytes1.toStringAsFixed(2)} KB";
+  //         } else {
+  //           size4 = "${sizeInMegabytes1.toStringAsFixed(2)} MB";
+  //         }
+  //
+  //         return Padding(
+  //           padding: const EdgeInsets.all(2.0),
+  //           child: GridTile(
+  //             footer: Padding(
+  //               padding: const EdgeInsets.all(2.0),
+  //               child: Container(
+  //                 height: 40,
+  //                 child: GridTileBar(
+  //                   backgroundColor: Colors.black45,
+  //                   title: Text(
+  //                     "$size4",
+  //                     style: const TextStyle(
+  //                         color: Colors.white70, fontWeight: FontWeight.bold),
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //             child: Image.memory(
+  //               snapshot.data!,
+  //               fit: BoxFit.cover,
+  //             ),
+  //           ),
+  //         );
+  //       } else {
+  //         return Container();
+  //       }
+  //     },
+  //   );
+  // }
   Widget _buildMediaTile(AssetEntity asset) {
-    return GridTile(
-      footer: Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Container(
-          height: 40,
-          child: GridTileBar(
-            backgroundColor: Colors.black45,
-            title: Text(
-              "$size1",
-              style: const TextStyle(
-                  color: Colors.white70, fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-      ),
-      child: FutureBuilder<Uint8List?>(
-        future: asset.thumbnailDataWithSize(const ThumbnailSize(200, 200)),
-        builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
-          if (snapshot.connectionState == ConnectionState.done &&
-              snapshot.data != null) {
-            print(snapshot.data!.lengthInBytes);
-            size1 = snapshot.data!.lengthInBytes;
-            return Padding(
-              padding: const EdgeInsets.all(2.0),
-              child: Image.memory(
-                snapshot.data!,
-                fit: BoxFit.cover,
-              ),
-            );
-          } else {
-            return Container();
-          }
-        },
-      ),
+    return FutureBuilder<Uint8List?>(
+      future: asset.thumbnailDataWithSize(const ThumbnailSize(200, 200)),
+      builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
+        if (snapshot.connectionState == ConnectionState.done &&
+            snapshot.data != null) {
+          Uint8List thumbnailData = snapshot.data!;
+
+          return FutureBuilder<Uint8List?>(
+            future: asset
+                .originBytes, // Assuming asset.originBytes is a Future<Uint8List?>
+            builder: (BuildContext context,
+                AsyncSnapshot<Uint8List?> originSnapshot) {
+              if (originSnapshot.connectionState == ConnectionState.done &&
+                  originSnapshot.data != null) {
+                int originBytesSize = originSnapshot.data!.length;
+                double sizeInKilobytes1 = originBytesSize / 1024;
+                double sizeInMegabytes1 = sizeInKilobytes1 / 1024;
+                dynamic size4;
+
+                if (sizeInKilobytes1 <= 1024) {
+                  size4 = "${sizeInKilobytes1.toStringAsFixed(2)} KB";
+                } else {
+                  size4 = "${sizeInMegabytes1.toStringAsFixed(2)} MB";
+                }
+
+                return InkWell(
+                  onTap: () {
+                    setState(() {
+                      selected = !selected;
+                    });
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: selected
+                        ? GridTile(
+                            footer: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Container(
+                                height: 40,
+                                child: GridTileBar(
+                                  backgroundColor: Colors.black45,
+                                  title: Text(
+                                    "$size4",
+                                    style: const TextStyle(
+                                        color: Colors.white70,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            child: Image.memory(
+                              thumbnailData,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        : GridTile(
+                            footer: Padding(
+                              padding: const EdgeInsets.all(2.0),
+                              child: Container(
+                                height: 40,
+                                child: GridTileBar(
+                                  backgroundColor: Colors.black45,
+                                  title: Text(
+                                    "$size4",
+                                    style: const TextStyle(
+                                        color: Colors.white70,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            child: Image.memory(
+                              thumbnailData,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                  ),
+                );
+              } else {
+                return Container();
+              }
+            },
+          );
+        } else {
+          return Container();
+        }
+      },
     );
   }
 }
