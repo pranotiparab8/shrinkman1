@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class Select_Image extends StatefulWidget {
 }
 
 class _Select_ImageState extends State<Select_Image> {
+  List<AssetEntity> selectedAssetList = [];
   bool selected = false;
   @override
   Widget build(BuildContext context) {
@@ -72,7 +74,7 @@ class _Select_ImageState extends State<Select_Image> {
             }
 
             final List<AssetEntity> mediaItems = snapshot.data ?? [];
-            //final int size = snapshot.data!.;
+            final int size = snapshot.data!.length;
 
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -104,42 +106,94 @@ class _Select_ImageState extends State<Select_Image> {
   //     builder: (BuildContext context, AsyncSnapshot<Uint8List?> snapshot) {
   //       if (snapshot.connectionState == ConnectionState.done &&
   //           snapshot.data != null) {
-  //         print(asset.originBytes);
   //
-  //         print(snapshot.data!.lengthInBytes);
-  //         dynamic size1 = snapshot.data!.lengthInBytes;
-  //         int sizeInBytes1 = size1;
-  //         double sizeInKilobytes1 = sizeInBytes1 / 1024;
-  //         double sizeInMegabytes1 = sizeInKilobytes1 / 1024;
-  //         dynamic size4;
-  //         if (sizeInKilobytes1 <= 1024) {
-  //           size4 = "${sizeInKilobytes1.toStringAsFixed(2)} KB";
-  //         } else {
-  //           size4 = "${sizeInMegabytes1.toStringAsFixed(2)} MB";
-  //         }
+  //         Uint8List thumbnailData = snapshot.data!;
   //
-  //         return Padding(
-  //           padding: const EdgeInsets.all(2.0),
-  //           child: GridTile(
-  //             footer: Padding(
-  //               padding: const EdgeInsets.all(2.0),
-  //               child: Container(
-  //                 height: 40,
-  //                 child: GridTileBar(
-  //                   backgroundColor: Colors.black45,
-  //                   title: Text(
-  //                     "$size4",
-  //                     style: const TextStyle(
-  //                         color: Colors.white70, fontWeight: FontWeight.bold),
-  //                   ),
-  //                 ),
-  //               ),
-  //             ),
-  //             child: Image.memory(
-  //               snapshot.data!,
-  //               fit: BoxFit.cover,
-  //             ),
-  //           ),
+  //         var str = asset.originFile;
+  //         print(str);
+  //         return FutureBuilder<Uint8List?>(
+  //           future: asset
+  //               .originBytes, // Assuming asset.originBytes is a Future<Uint8List?>
+  //           builder: (BuildContext context,
+  //               AsyncSnapshot<Uint8List?> originSnapshot) {
+  //             if (originSnapshot.connectionState == ConnectionState.done &&
+  //                 originSnapshot.data != null) {
+  //               Uint8List originBytesData = originSnapshot.data!;
+  //               int originBytesSize = originBytesData.length;
+  //               double sizeInKilobytes1 = originBytesSize / 1024;
+  //               double sizeInMegabytes1 = sizeInKilobytes1 / 1024;
+  //               dynamic size4;
+  //
+  //               if (sizeInKilobytes1 <= 1024) {
+  //                 size4 = "${sizeInKilobytes1.toStringAsFixed(2)} KB";
+  //               } else {
+  //                 size4 = "${sizeInMegabytes1.toStringAsFixed(2)} MB";
+  //               }
+  //
+  //               return InkWell(
+  //                 onTap: () {
+  //                   setState(() {
+  //                     selected = !selected;
+  //                   });
+  //                 },
+  //                 child: Padding(
+  //                     padding: const EdgeInsets.all(2.0),
+  //                     child: Stack(
+  //                       children: [
+  //                         GridTile(
+  //                           footer: Padding(
+  //                             padding: const EdgeInsets.all(2.0),
+  //                             child: Container(
+  //                               height: 40,
+  //                               child: GridTileBar(
+  //                                 backgroundColor: Colors.black45,
+  //                                 title: Text(
+  //                                   "$size4",
+  //                                   style: const TextStyle(
+  //                                       color: Colors.white70,
+  //                                       fontWeight: FontWeight.bold),
+  //                                 ),
+  //                               ),
+  //                             ),
+  //                           ),
+  //                           child: Image.memory(
+  //                             thumbnailData,
+  //                             fit: BoxFit.cover,
+  //                           ),
+  //                         ),
+  //                         Positioned.fill(
+  //                           child: Align(
+  //                               alignment: Alignment.topRight,
+  //                               child: GestureDetector(
+  //                                 child: Padding(
+  //                                     padding: const EdgeInsets.all(10),
+  //                                     child: Container(
+  //                                       decoration: BoxDecoration(
+  //                                           color: selected
+  //                                               ? Colors.blue
+  //                                               : Colors.black12,
+  //                                           shape: BoxShape.circle,
+  //                                           border: Border.all(
+  //                                               color: Colors.white,
+  //                                               width: 1.5)),
+  //                                       child: Padding(
+  //                                         padding: const EdgeInsets.all(10),
+  //                                         child: Text("",
+  //                                             style: TextStyle(
+  //                                                 color: selected
+  //                                                     ? Colors.white
+  //                                                     : Colors.transparent)),
+  //                                       ),
+  //                                     )),
+  //                               )),
+  //                         ),
+  //                       ],
+  //                     )),
+  //               );
+  //             } else {
+  //               return Container();
+  //             }
+  //           },
   //         );
   //       } else {
   //         return Container();
@@ -155,14 +209,16 @@ class _Select_ImageState extends State<Select_Image> {
             snapshot.data != null) {
           Uint8List thumbnailData = snapshot.data!;
 
-          return FutureBuilder<Uint8List?>(
-            future: asset
-                .originBytes, // Assuming asset.originBytes is a Future<Uint8List?>
-            builder: (BuildContext context,
-                AsyncSnapshot<Uint8List?> originSnapshot) {
+          return FutureBuilder<File>(
+            future: getOriginalFile(asset),
+            builder:
+                (BuildContext context, AsyncSnapshot<File> originSnapshot) {
               if (originSnapshot.connectionState == ConnectionState.done &&
                   originSnapshot.data != null) {
-                int originBytesSize = originSnapshot.data!.length;
+                File originBytesData = originSnapshot.data!;
+
+                double originBytesSize =
+                    originBytesData.lengthSync().toDouble();
                 double sizeInKilobytes1 = originBytesSize / 1024;
                 double sizeInMegabytes1 = sizeInKilobytes1 / 1024;
                 dynamic size4;
@@ -172,60 +228,65 @@ class _Select_ImageState extends State<Select_Image> {
                 } else {
                   size4 = "${sizeInMegabytes1.toStringAsFixed(2)} MB";
                 }
-
-                return InkWell(
-                  onTap: () {
-                    setState(() {
-                      selected = !selected;
-                    });
-                  },
-                  child: Padding(
+                // AssetEntity assetEntity = selectedAssetList[index];
+                return Padding(
                     padding: const EdgeInsets.all(2.0),
-                    child: selected
-                        ? GridTile(
-                            footer: Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: Container(
-                                height: 40,
-                                child: GridTileBar(
-                                  backgroundColor: Colors.black45,
-                                  title: Text(
-                                    "$size4",
-                                    style: const TextStyle(
-                                        color: Colors.white70,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                    child: Stack(
+                      children: [
+                        GridTile(
+                          footer: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: Container(
+                              height: 40,
+                              child: GridTileBar(
+                                backgroundColor: Colors.black45,
+                                title: Text(
+                                  "$size4",
+                                  style: const TextStyle(
+                                      color: Colors.white70,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
-                            child: Image.memory(
-                              thumbnailData,
-                              fit: BoxFit.cover,
-                            ),
-                          )
-                        : GridTile(
-                            footer: Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: Container(
-                                height: 40,
-                                child: GridTileBar(
-                                  backgroundColor: Colors.black45,
-                                  title: Text(
-                                    "$size4",
-                                    style: const TextStyle(
-                                        color: Colors.white70,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ),
-                            ),
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              setState(() {
+                                selected = !selected;
+                              });
+                            },
                             child: Image.memory(
                               thumbnailData,
                               fit: BoxFit.cover,
                             ),
                           ),
-                  ),
-                );
+                        ),
+                        Positioned.fill(
+                            child: Align(
+                                alignment: Alignment.topRight,
+                                child: GestureDetector(
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(10),
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                                color: selected
+                                                    ? Colors.blue
+                                                    : Colors.black12,
+                                                shape: BoxShape.circle,
+                                                border: Border.all(
+                                                    color: Colors.white,
+                                                    width: 1.5)),
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(10),
+                                              child: Text("",
+                                                  style: TextStyle(
+                                                      color: selected
+                                                          ? Colors.white
+                                                          : Colors
+                                                              .transparent)),
+                                            )))))),
+                      ],
+                    ));
               } else {
                 return Container();
               }
@@ -236,5 +297,10 @@ class _Select_ImageState extends State<Select_Image> {
         }
       },
     );
+  }
+
+  Future<File> getOriginalFile(AssetEntity assetEntity) async {
+    File? file = await assetEntity.originFile;
+    return file!;
   }
 }

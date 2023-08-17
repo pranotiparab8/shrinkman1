@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:shrinkman1/Widgets/select_folder.dart';
+
+import 'compression_setting.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         appBarTheme: AppBarTheme(),
       ),
-      home: Select_Folder(),
+      home: Compression_setting(),
     );
   }
 }

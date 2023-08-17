@@ -1,77 +1,69 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:io';
 
-class Expansiontile extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_all_path_provider/flutter_all_path_provider.dart';
+
+class Hello extends StatefulWidget {
+  const Hello({Key? key}) : super(key: key);
+
+  @override
+  _HelloState createState() => _HelloState();
+}
+
+class _HelloState extends State<Hello> {
+  List<StorageInfo> _storageInfo = [];
+
+  @override
+  void initState() {
+    super.initState();
+    initPlatformState();
+  }
+
+  Future<void> initPlatformState() async {
+    late List<StorageInfo> storageInfo;
+    try {
+      storageInfo = await FlutterAllPathProvider.getStorageInfo();
+    } on PlatformException {
+      return;
+    }
+
+    if (!mounted) return;
+
+    setState(() {
+      _storageInfo = storageInfo;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Expansion Tile'),
-      ),
-      body: Container(
-        height: 50.0,
-        width: 335.0,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          color: Color(0xFFffffff),
-          boxShadow: [
-            BoxShadow(
-              color: Color(0xffDDDDDD),
-              blurRadius: 4.0, // soften the shadow
-              spreadRadius: 1.0, //extend the shadow
-              offset: Offset(
-                1.0, // Move to right 5  horizontally
-                1.0, // Move to bottom 5 Vertically
-              ),
-            )
-          ],
+    File file =
+        File('${_storageInfo[0].rootDir}/DCIM/Camera/IMG_20230816_092225.jpg');
+    File file1 = File('${_storageInfo[1].rootDir}/FAREWELL/_MG_7760.JPG');
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Plugin example app'),
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0),
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 20.0),
-              Theme(
-                data: Theme.of(context)
-                    .copyWith(dividerColor: Colors.transparent),
-                child: ExpansionTile(
-                  title: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "File Name",
-                        style: TextStyle(
-                            color: Color(0xFF064494),
-                            fontWeight: FontWeight.w500),
-                      ),
-                      SizedBox(width: 20),
-                      Text("2.2Mb",
-                          style: TextStyle(
-                              color: Color(0xFF064494),
-                              fontWeight: FontWeight.w500)),
-                      Icon(Icons.arrow_right_alt),
-                      Text("300kb",
-                          style: TextStyle(
-                              color: Color(0xFF064494),
-                              fontWeight: FontWeight.w500)),
-                    ],
-                  ),
-                  children: <Widget>[
-                    ListTile(
-                        title: Row(
-                      children: [
-                        Icon(Icons.delete, color: Color(0xFF064494)),
-                        SizedBox(width: 15),
-                        Icon(Icons.folder_open, color: Color(0xFF064494)),
-                        SizedBox(width: 15),
-                        Icon(Icons.share, color: Color(0xFF064494)),
-                      ],
-                    ))
-                  ],
-                ),
-              ),
-            ],
-          ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+                'Internal Storage root:\n ${(_storageInfo.isNotEmpty) ? _storageInfo[0].rootDir : "unavailable"}\n'),
+            Text(
+                'Internal Storage appFilesDir:\n ${(_storageInfo.isNotEmpty) ? _storageInfo[0].appFilesDir : "unavailable"}\n'),
+            Text(
+                'Internal Storage AvailableGB:\n ${(_storageInfo.isNotEmpty) ? _storageInfo[0].availableGB : "unavailable"}\n'),
+            Text(
+                'SD Card root: ${(_storageInfo.length > 1) ? _storageInfo[1].rootDir : "unavailable"}\n'),
+            Text(
+                'SD Card appFilesDir: ${(_storageInfo.length > 1) ? _storageInfo[1].appFilesDir : "unavailable"}\n'),
+            Text(
+                'SD Card AvailableGB:\n ${(_storageInfo.length > 1) ? _storageInfo[1].availableGB : "unavailable"}\n'),
+            //Image.file(file),
+            Image.file(file1),
+          ],
         ),
       ),
     );
